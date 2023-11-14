@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Test Site</title>
+  
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:300,400,700" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.pagepiling.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/examples.css" />
+ 
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="js/jquery.pagepiling.min.js"></script>
+	<script type="text/javascript">
+		var deleteLog = false;
+
+		$(document).ready(function() {
+	    	$('#pagepiling').pagepiling({
+				direction: 'horizontal',
+	    		menu: '#menu',
+	    		anchors: ['page1', 'page2', 'page3'],
+			    sectionsColor: ['#bfda00', '#2ebe21', '#2C3E50', '#51bec4'],
+			    onLeave: function(index, nextIndex, direction){
+			    	if(deleteLog){
+			    		$('').html('');
+			    	}
+			    	$('').append('' + index + '' + nextIndex + '' + direction + '')
+			    },
+			    afterRender: function(){
+			    	$('').append('');
+			    },
+			    afterLoad: function(anchorLink, index){
+			    	$('').append('' + anchorLink + "" + index + '');
+
+			    	//section 2
+					if(index == 2){
+						//moving the image
+						$('#section2').find('.intro').delay(100).animate({
+							left: '0%'
+						}, 1500, 'easeOutExpo', function(){
+							$('#section2').find('p').first().fadeIn(700, function(){
+								$('#section2').find('p').last().fadeIn(600);
+							});
+						});
+
+
+					}
+
+					//section 3
+					if(anchorLink == 'page3'){
+						//section 3
+						$('#section3').find('.intro').delay(100).animate({
+								left: '0%'
+						}, 1500, 'easeOutExpo');
+					}
+
+					deleteLog = true;
+			    }
+			});
+	    });
+    </script>
+
+<style>
+#section2 .intro{
+	position: absolute;
+	right: -30%;
+	top: 160px;
+}
+#section2 p{ 
+	display: none;
+}
+#section3 .intro{
+	left: 140%;
+	position: relative;
+}
+#section1,
+#section2,
+#section3,
+#section4{
+	background-size: cover;
+}
+#section1{
+	background-image: url(img/bg1.jpg);
+}
+#section2{
+	background-image: url(img/bg2.jpg);
+	padding: 6% 0 0 0;
+}
+#section3{
+	background-image: url(img/bg3.jpg);
+	padding: 6% 0 0 0;
+}
+#section4{
+	background-image: url(img/bg4.jpg);
+	padding: 6% 0 0 0;
+}
+</style>
+
+</head>
+<body>
+
+
+<div style="position:fixed;top:50px;left:50px;color:white;z-index:999;" id="callbacksDiv"></div>
+
+<div id="pagepiling">
+	<div class="section" id="section1">
+		<h1></h1>
+		<p></p>
+		<br />
+	</div>
+	<div class="section" id="section2">
+		<div class="intro">
+			<div class="men">
+			<h1> </h1>
+			<p> <img src="img/man.png" width="399" height="539" > </p>
+			</div>
+		</div>
+	</div>
+	<div class="section" id="section3">
+		<div class="intro">
+			<h1></h1>
+			<p></p>
+		</div>
+	</div>
+	<div class="section" id="section4">
+		<div class="intro">
+			<h1></h1>
+			<p></p>
+		</div>
+	</div>
+</div>
+
+</body>
+
+ 
+<script src="js/libs.min.js"></script>
+<script src="js/main.js"></script>
+</html>
